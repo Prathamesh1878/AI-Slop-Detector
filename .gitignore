@@ -14,3 +14,7 @@ data/processed/
 
 .DS_Store
 Thumbs.db
+
+models/*.pkl
+
+.vscode/
