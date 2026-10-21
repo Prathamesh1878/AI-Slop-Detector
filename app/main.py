@@ -1,5 +1,9 @@
+from pathlib import Path
+
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
+from fastapi.staticfiles import StaticFiles
 
 from src.detector import AIDetector
 
@@ -7,6 +11,15 @@ from src.detector import AIDetector
 app = FastAPI(
     title="AI Slop & AI Content Detector",
     version="1.0.0",
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+
+app.mount(
+    "/static",
+    StaticFiles(directory=FRONTEND_DIR),
+    name="static",
 )
 
 detector = AIDetector()
@@ -20,10 +33,7 @@ class PredictionRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {
-        "message": "AI Slop & AI Content Detector API"
-    }
-
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 @app.post("/predict")
 def predict(request: PredictionRequest):

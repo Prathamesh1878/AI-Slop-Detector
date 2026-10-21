@@ -10,9 +10,8 @@ def test_root():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.json()["message"] == (
-        "AI Slop & AI Content Detector API"
-    )
+    assert "text/html" in response.headers["content-type"]
+    assert "AI Slop & AI Content Detector" in response.text
 
 
 def test_predict_valid_text():
