@@ -11,7 +11,10 @@ def test_root():
 
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
-    assert "AI Slop & AI Content Detector" in response.text
+    assert (
+    "AI Slop & AI Content Detector" in response.text
+    or "AI Slop &amp; AI Content Detector" in response.text
+    )
 
 
 def test_predict_valid_text():

@@ -1,37 +1,150 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Slop & AI Content Detector</title>
+    <meta name="theme-color" content="#0b1020">
+    <title>AI Slop &amp; AI Content Detector | AI Shield</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a href="/" class="brand">
+                <span class="brand-icon">✳</span>
+                <span>AI<span class="brand-accent">Shield</span>
+                <small>CONTENT INTELLIGENCE</small></span>
+            </a>
 
-    <h1>AI Slop & AI Content Detector </h1>
 
-    <p>
-        Analyze text for AI-generated content probability
-        and AI slop indicators.
-    </p>
+        <div class="nav-label">WORKSPACE</div>
+        <a class="nav-item active" href="#overview">▦ <span>Dashboard</span></a>
+        <a class="nav-item" href="#text-detector">▤ <span>Text detection</span></a>
+        <a class="nav-item" href="#image-detector">▧ <span>Image detection</span></a>
 
-    <textarea
-        id="textInput"
-        rows="12"
-        cols="80"
-        placeholder="Paste your text here..."
-    ></textarea>
+        <div class="sidebar-bottom">
+            <div class="status-card">
+                <span class="status-dot"></span>
+                <div><strong>Detection system</strong><small>Local API interface</small></div>
+            </div>
+            <p class="sidebar-note">AI predictions are estimates, not proof of content origin.</p>
+        </div>
+    </aside>
 
-    <br><br>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <div class="eyebrow">CONTENT ANALYSIS PLATFORM</div>
+                <h1>AI Slop &amp; AI Content Detector</h1>
+                <p class="top-subtitle">Analyze text and images with AI detection models.</p>
+            </div>
 
-    <button id="analyzeButton">
-        Analyze Text
-    </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                <span id="themeIcon">☾</span>
+                <span id="themeLabel">Dark mode</span>
+            </button>
+        </header>
 
-    <div id="results"></div>
+        <section class="welcome-banner">
+            <div class="banner-copy">
+                <span class="banner-tag">AI CONTENT INTELLIGENCE</span>
+                <h2>Understand your content.<br><span>Look beyond the surface.</span></h2>
+                <p>Check text for AI patterns and slop indicators, or inspect an image for signs of AI generation.</p>
+            </div>
+            <div class="banner-art" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="art-core">✳</div>
+                <span class="art-node node-one">AI</span>
+                <span class="art-node node-two">TXT</span>
+                <span class="art-node node-three">IMG</span>
+            </div>
+        </section>
 
-    <script src="/static/app.js"></script>
+        <section class="stats-grid" aria-label="Available detection tools">
+            <article class="stat-card">
+                <div class="stat-icon purple">▤</div>
+                <div><span class="stat-label">TEXT ANALYSIS</span><h3>AI &amp; Slop</h3><p>Language pattern analysis</p></div>
+                <span class="stat-arrow">↗</span>
+            </article>
+            <article class="stat-card">
+                <div class="stat-icon blue">▧</div>
+                <div><span class="stat-label">IMAGE ANALYSIS</span><h3>AI Image Check</h3><p>Image classification model</p></div>
+                <span class="stat-arrow">↗</span>
+            </article>
+            <article class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div><span class="stat-label">PRIVACY</span><h3>Local interface</h3><p>Runs against your local API</p></div>
+                <span class="stat-arrow">●</span>
+            </article>
+        </section>
+
+        <section class="detector-card" id="text-detector">
+            <div class="section-heading">
+                <div class="section-icon purple">▤</div>
+                <div>
+                    <span class="section-kicker">01 / LANGUAGE</span>
+                    <h2>AI Text &amp; Slop Detector</h2>
+                    <p>Analyze writing for AI-generated patterns and low-quality content indicators.</p>
+                </div>
+            </div>
+
+            <label for="textInput" class="field-label">CONTENT TO ANALYZE</label>
+            <textarea id="textInput" rows="9" maxlength="10000"
+                placeholder="Paste your text here. Add at least 10 characters to begin..."></textarea>
+
+            <div class="input-footer">
+                <span>Keep your text between 10 and 10,000 characters.</span>
+                <span id="charCount">0 / 10000</span>
+            </div>
+
+            <button id="analyzeButton" class="primary-button" type="button">
+                <span>Analyze text</span><span>→</span>
+            </button>
+            <div id="results" class="result-panel" aria-live="polite"></div>
+        </section>
+
+        <section class="detector-card" id="image-detector">
+            <div class="section-heading">
+                <div class="section-icon blue">▧</div>
+                <div>
+                    <span class="section-kicker">02 / VISUALS</span>
+                    <h2>AI Image Detector</h2>
+                    <p>Upload an image to estimate whether it may have been AI-generated.</p>
+                </div>
+            </div>
+
+            <label for="imageInput" class="field-label">IMAGE FILE</label>
+            <div class="upload-zone">
+                <div class="upload-symbol">↑</div>
+                <strong>Choose an image to inspect</strong>
+                <p>JPEG, PNG or WebP · Maximum size 10 MB</p>
+                <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div id="imagePreviewContainer" class="preview-container" hidden>
+                <img id="imagePreview" alt="Selected image preview">
+                <p id="imageDetails"></p>
+            </div>
+
+            <button id="analyzeImageButton" class="primary-button blue-button" type="button">
+                <span>Detect AI image</span><span>→</span>
+            </button>
+            <div id="imageResults" class="result-panel" aria-live="polite"></div>
+
+            <p class="disclaimer"><strong>Important:</strong> Model predictions can be wrong. A low AI score does not prove an image is authentic, and results should not be used as the sole basis for important decisions.</p>
+        </section>
+
+        <footer class="page-footer">
+            <span>✳ AI Shield · Content Intelligence</span>
+            <span>Experimental detection tools · Use results critically</span>
+        </footer>
+    </main>
+</div>
+
+<script src="/static/app.js"></script>
+
 
 </body>
 </html>
